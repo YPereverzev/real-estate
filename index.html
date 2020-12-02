@@ -19,7 +19,7 @@
             <div class="container">
                 <div 
                     class="card" 
-                    data-index="12314"
+                    data-index="1"
                     data-distance="8"
                     data-due-date="thisYear"
                     data-zero-service-price="true"
@@ -56,7 +56,7 @@
                 </div>    
                 <div 
                     class="card" 
-                    data-index="12314"
+                    data-index="2"
                     data-distance="8"
                     data-due-date="thisYear"
                     data-zero-service-price="true"
@@ -92,7 +92,14 @@
                     
                 </div>    
     
-                <div class="card">
+                <div 
+                    class="card" 
+                    data-index="3"
+                    data-distance="18"
+                    data-due-date="thisYear"
+                    data-zero-service-price="true"
+                    data-options="no_cars pantries_are_present"
+                >
                     <img class="imaga" src="/image/img.jpg" alt="estate">
                     <div class="term">
                         <div class="status">
@@ -122,7 +129,14 @@
                     
                 </div>    
     
-                <div class="card">
+                <div
+                    class="card" 
+                    data-index="4"
+                    data-distance="28"
+                    data-due-date="inOperation"
+                    data-zero-service-price="false"
+                    data-options="no_cars pantries_are_present"
+                >
                     <img class="imaga" src="/image/img.jpg" alt="estate">
                     <div class="term">
                         <div class="status">
@@ -229,31 +243,30 @@
     
                 <div class="due-date__options options">
                     <label class="due-date__option-label" >
-                        <input type="radio" class="due-date__option" name="due-date">
+                        <input id="anyDueDate" type="radio" class="radio due-date__option" name="due-date" checked>
                         <span class="due-date__text">
                             Любой
                         </span>
                     </label>                
     
                     <label class="due-date__option-label">
-                        <input type="radio" class="due-date__option" name="due-date">
+                        <input id="inOperation" type="radio" class="radio due-date__option" name="due-date">
                         <span class="due-date__text">
                             Сдан
                         </span>
                     </label>                
     
                     <label class="due-date__option-label">
-                        <input type="radio" class="due-date__option" name="due-date">
+                        <input id="thisYear" type="radio" class="radio due-date__option" name="due-date">
                         <span class="due-date__text">
                             В этом году
                         </span>
                     </label>                
     
                     <label class="due-date__option-label">
-                        <input type="radio" class="due-date__option" name="due-date">
+                        <input id="nextYear" type="radio" class="radio due-date__option" name="due-date">
                         <span class="due-date__text" id="due-date__text-id">
                             В следующем году
-                            
                         </span>
                     </label>                
     

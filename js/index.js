@@ -1,9 +1,11 @@
-const filterСustomization = {
-    distance: 10,
-    dueDdate: ["any"],
-    zeroServicePrice:  true,
-    dataOptions: ["no_cars"],
-}
+import { 
+    apllyOptionFilterToCard,
+    apllyDueDateFilterToCard,
+    resetfilterСustomization
+} from './addfantions.js';
+
+const filterСustomization = {};
+resetfilterСustomization(filterСustomization);
 
 //selecting all cards witg info
 const allCards = document.querySelectorAll('.card');
@@ -13,11 +15,10 @@ const chevron = document.querySelectorAll('.chevron').forEach(element => {
     element.addEventListener('click', (element) => {
         element.target.classList.toggle('chevron-down');
         element.target.nextElementSibling.classList.toggle('hidden');
-
     });
 });
 
-//adding activ nonActive classes
+//adding activ&nonActive classes
 const distatnceItems = document.querySelectorAll('.distatnce-item');
 distatnceItems.forEach(element => {
     element.addEventListener('click', (element) => {
@@ -30,9 +31,8 @@ distatnceAny.addEventListener('click', (element) => {
         element.target.classList.toggle('btn-distatnce--active');
         document.querySelectorAll('.distatnce-item').forEach(item => item.classList.remove('btn-distatnce--active'))
     });
-    
 
-
+//adding hide&show functionality to moreDueDateBtn 
 const moreDueDateBtn = document.querySelector('.more-due-date');
 const additionalDueDateOptions = document.querySelectorAll('.due-date-aaditional');
 moreDueDateBtn.addEventListener ('click',
@@ -43,64 +43,51 @@ moreDueDateBtn.addEventListener ('click',
     }
 )
     
-const a = 1;
-// const addDueDateOptions = document.querySelectorAll('.due-date-aaditional')
-//     .forEach((item) => item.classList.)
-
-
 // working width "Дополнительные опции" as data-option-type of dataset
 const implementFiltersBtn = document.querySelector('.implement-filters-btn');
 implementFiltersBtn.addEventListener('click', () => applyAddOptions()) 
 const applyAddOptions = () => {
-    filterСustomization.dataOptions = []; //reset all data options in general state
-    const allDataOptionType = document.querySelectorAll('.option-type');
+    resetfilterСustomization(filterСustomization);
     
     //add actual selected options to filterСustomization
+    const allDataOptionType = document.querySelectorAll('.option-type');
     allDataOptionType.forEach(item => {
         if (item.checked) {
             filterСustomization.dataOptions.push(item.dataset.optionType);
         }
     })
-    
-    //applying Option filter
-    allCards.forEach(card => {
-        //взять каждый элемент из allCards и проверить: если у него есть ВСЕ такие датасеты
-        //dataOptions, которые есть в списке filterСustomization.dataOptions, то
-        //только тогда его показать
 
-        //если нет dataset.options - просто спрятать его и не идти дальше
-        
-        // здесь ниже выбираю все здачения из options dsts-seta элемента DOM
-        // превращаю в массив 
-        // чтобы потом проверить, что все они есть в filterСustomization
+    const allDueDateType = document.querySelectorAll('.radio');
+    allDueDateType.forEach(item => {
+        if (item.checked) {
+            filterСustomization.dueDate = item.id;
+        }
+    })
+    
+    //applying "Option" and "DueDate" filter
+    allCards.forEach(card => {
         let selectedOptionsForCurrentCard;
         if (card.dataset.options) {
             selectedOptionsForCurrentCard = card.dataset.options.split(' ');
-        } else {
-            card.classList.add('hidden');
-            return;
-        }
+            apllyOptionFilterToCard(filterСustomization.dataOptions, card, selectedOptionsForCurrentCard )
+        } 
 
-        filterСustomization.dataOptions.forEach(item => {
+        let selectedDueDateForCurrentCard;
+        if (card.dataset.dueDate) {
+            selectedDueDateForCurrentCard = card.dataset.dueDate;
             debugger;
-            if (!selectedOptionsForCurrentCard.includes(item)) {
-                card.classList.add('hidden');
-            }
-        })
-
-
+            apllyDueDateFilterToCard(filterСustomization.dueDate, card, selectedDueDateForCurrentCard )
+        }
     })
 }   
-
 
 export const clearFiltersBtn = document.querySelector('.clear-filters-btn');
 clearFiltersBtn.addEventListener('click', () => {
     filterСustomization.distance = null;
-    filterСustomization.dueDdate = [];
+    filterСustomization.dueDate = [];
     filterСustomization.zeroServicePrice = false;
     filterСustomization.dataOptions = [];
     console.log('------------ ', filterСustomization);
-    debugger;
     allCards.forEach(card => {
         if (!card.classList.contains('additional-card')) {
             card.classList.remove('hidden');
