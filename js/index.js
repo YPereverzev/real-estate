@@ -1,7 +1,8 @@
 import { 
+    apllyServiceFilterToCard,
     apllyOptionFilterToCard,
     apllyDueDateFilterToCard,
-    apllydistanceFilterToCard,
+    apllyDistanceFilterToCard,
     resetfilterСustomization,
 } from './addfantions.js';
 
@@ -85,6 +86,11 @@ const applyAddOptions = () => {
             filterСustomization.distance.push(item.id);
         }
     })
+
+    
+    const zeroServicePriceCheckBox = document.getElementById('zero-service');
+    filterСustomization.zeroServicePrice = zeroServicePriceCheckBox.checked;
+
     //applying "Option" and "DueDate" filter
     allCards.forEach(card => {
         let selectedOptionsForCurrentCard;
@@ -102,9 +108,15 @@ const applyAddOptions = () => {
         let selectedDistanceForCurrentCard;
         if (card.dataset.distance) {
             selectedDistanceForCurrentCard = card.dataset.distance;
-            debugger;
-            apllydistanceFilterToCard(filterСustomization.distance, card, selectedDistanceForCurrentCard )
+            apllyDistanceFilterToCard(filterСustomization.distance, card, selectedDistanceForCurrentCard )
         }
+
+        let selectedServiceForCurrentCard;
+        if (card.dataset.zeroServicePrice) {
+            selectedServiceForCurrentCard = card.dataset.zeroServicePrice;
+            
+            apllyServiceFilterToCard(filterСustomization.zeroServicePrice, card, selectedServiceForCurrentCard )
+        }   
     })
 }   
 

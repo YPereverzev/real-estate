@@ -31,11 +31,10 @@ export const apllyDueDateFilterToCard = (
     }
 }
 
-
 // distance: string[];
 // card: typeOf card;
 // selectedDistanceForCurrentCard: string[];
-export const apllydistanceFilterToCard = (
+export const apllyDistanceFilterToCard = (
     distance, 
     card,
     selectedDistanceForCurrentCard 
@@ -43,7 +42,6 @@ export const apllydistanceFilterToCard = (
     const applyedDistance = parseInt(selectedDistanceForCurrentCard);
     let isDisplaying = false;
     distance.forEach(condition => {
-        debugger;
         switch (condition) {
             case "distance-any":
                 isDisplaying = true;
@@ -83,11 +81,22 @@ export const apllydistanceFilterToCard = (
     return
 }
 
-// type: string
-const distanceFilterToggle = (type) => {
+// zeroServicePrice: boolean;
+// card: typeOf card;
+// selectedDistanceForCurrentCard: string[];
+export const apllyServiceFilterToCard = (
+    zeroServicePrice, 
+    card,
+    selectedServiceForCurrentCard 
+) => {
+    debugger;
+    if (!zeroServicePrice) return;
+    
+    if (selectedServiceForCurrentCard === "false") {
+        card.classList.add('hidden');
+    }
 
 }
-
 
 
 export const resetfilterСustomization = (filterСustomization) => {
