@@ -21,7 +21,7 @@ export const apllyDueDateFilterToCard = (
     card,
     selectedDueDateForCurrentCard 
 ) => {
-    if (dueDate === 'any') {
+    if (dueDate === 'anyDueDate') {
         return
     }
 
@@ -31,9 +31,68 @@ export const apllyDueDateFilterToCard = (
     }
 }
 
+
+// distance: string[];
+// card: typeOf card;
+// selectedDistanceForCurrentCard: string[];
+export const apllydistanceFilterToCard = (
+    distance, 
+    card,
+    selectedDistanceForCurrentCard 
+) => {
+    const applyedDistance = parseInt(selectedDistanceForCurrentCard);
+    let isDisplaying = false;
+    distance.forEach(condition => {
+        debugger;
+        switch (condition) {
+            case "distance-any":
+                isDisplaying = true;
+                return;
+    
+            case "distance-less-then-10":
+                if ( applyedDistance < 10) {
+                    isDisplaying = true;
+                }
+                break;
+    
+            case "distance-10-to-20":
+                if ( 10 <= applyedDistance && applyedDistance < 20) {
+                    isDisplaying = true;
+                }
+            break;
+    
+            case "distance-20-to-30":
+                if ( 20 <= applyedDistance && applyedDistance < 30) {
+                    isDisplaying = true;
+                }
+                break;
+    
+            case "distance-more-then-30":
+                if ( 30 <= applyedDistance) {
+                    isDisplaying = true;
+                }
+                break;
+            default:
+                break;
+        }
+        
+    })
+    if (!isDisplaying) {
+        card.classList.add('hidden');
+    }
+    return
+}
+
+// type: string
+const distanceFilterToggle = (type) => {
+
+}
+
+
+
 export const resetfilterСustomization = (filterСustomization) => {
-    filterСustomization.distance = ["any"],
-    filterСustomization.dueDate = "any",
+    filterСustomization.distance = ["distance-any"],
+    filterСustomization.dueDate = "anyDueDate",
     filterСustomization.zeroServicePrice = false,
     filterСustomization.dataOptions = []; 
 }

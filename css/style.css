@@ -145,12 +145,12 @@ body {
     vertical-align: bottom;
 }
 
-.distatnce {
+.distance {
     position: relative;
 }
 
 
-.distatnce-min {
+.distance-min {
     border-radius: 4px;
     margin-top: 20px;
     display: grid;
@@ -178,7 +178,7 @@ body {
     display: none !important;
 }
 
-/* .distatnce img { */
+/* .distance img { */
 .chevron {
     position: absolute;
     top: 0px;
@@ -215,17 +215,17 @@ button {
 }
 
 
-.btn-distatnce--active {
+.btn-distance--active {
     background-color: #FFCF26;
 }
 
-.distatnce-min button:hover{
+.distance-min button:hover{
     transition: 0.2s;
     opacity: 0.6;
 }    
 
 
-.distatnce-any {
+.distance-any {
     grid-column: 1 / 5;
     grid-row: 2 / 3;
 }

@@ -1,7 +1,8 @@
 import { 
     apllyOptionFilterToCard,
     apllyDueDateFilterToCard,
-    resetfilterСustomization
+    apllydistanceFilterToCard,
+    resetfilterСustomization,
 } from './addfantions.js';
 
 const filterСustomization = {};
@@ -18,18 +19,30 @@ const chevron = document.querySelectorAll('.chevron').forEach(element => {
     });
 });
 
-//adding activ&nonActive classes
-const distatnceItems = document.querySelectorAll('.distatnce-item');
-distatnceItems.forEach(element => {
-    element.addEventListener('click', (element) => {
-        element.target.classList.toggle('btn-distatnce--active');
-        document.querySelector('.distatnce-any').classList.remove('btn-distatnce--active');
+//adding activ&nonActive fanctionality 
+const distanceItems = document.querySelectorAll('.distance-item');
+distanceItems.forEach(element => {
+    element.addEventListener('click', (event) => {
+        event.target.classList.toggle('btn-distance--active');
+        document.getElementById('distance-any').classList.remove('btn-distance--active');
+        if (filterСustomization.distance.includes('distance-any')) {
+            filterСustomization.distance.splice(filterСustomization.distance.indexOf('distance-any'), 1);
+        }
+
+        if (filterСustomization.distance.includes(event.target.id)) {
+            filterСustomization.distance.splice(filterСustomization.distance.indexOf(event.target.id), 1);
+        } else {
+            filterСustomization.distance.push(event.target.id);
+        }
+        
     });
 });
-const distatnceAny = document.querySelector('.distatnce-any');
-distatnceAny.addEventListener('click', (element) => {
-        element.target.classList.toggle('btn-distatnce--active');
-        document.querySelectorAll('.distatnce-item').forEach(item => item.classList.remove('btn-distatnce--active'))
+
+const distanceAny = document.getElementById('distance-any');
+distanceAny.addEventListener('click', (element) => {
+        element.target.classList.toggle('btn-distance--active');
+        document.querySelectorAll('.distance-item').forEach(item => item.classList.remove('btn-distance--active'))
+        filterСustomization.distance = ["distance-any"];
     });
 
 //adding hide&show functionality to moreDueDateBtn 
@@ -64,6 +77,14 @@ const applyAddOptions = () => {
         }
     })
     
+
+    const alldistanceType = document.querySelectorAll('.distance-item-mark');
+    filterСustomization.distance = [];
+    alldistanceType.forEach(item => {
+        if (item.classList.contains('btn-distance--active')) {
+            filterСustomization.distance.push(item.id);
+        }
+    })
     //applying "Option" and "DueDate" filter
     allCards.forEach(card => {
         let selectedOptionsForCurrentCard;
@@ -75,8 +96,14 @@ const applyAddOptions = () => {
         let selectedDueDateForCurrentCard;
         if (card.dataset.dueDate) {
             selectedDueDateForCurrentCard = card.dataset.dueDate;
-            debugger;
             apllyDueDateFilterToCard(filterСustomization.dueDate, card, selectedDueDateForCurrentCard )
+        }
+
+        let selectedDistanceForCurrentCard;
+        if (card.dataset.distance) {
+            selectedDistanceForCurrentCard = card.dataset.distance;
+            debugger;
+            apllydistanceFilterToCard(filterСustomization.distance, card, selectedDistanceForCurrentCard )
         }
     })
 }   
